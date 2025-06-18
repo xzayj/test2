@@ -1,0 +1,49 @@
+
+
+package db;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.util.List;
+
+public class AppearMain {
+    void insert(int number, int shicode) {
+        AppearDAO appearDAO = new AppearDAO();
+        boolean success = appearDAO.insert(number, shicode);
+        System.out.println(success);
+    }
+    
+    void insert(int number, int shicode, int year, int month, int day, int hour, int minute, int second ) {
+        AppearDAO appearDAO = new AppearDAO();
+        boolean success = appearDAO.insert(number, shicode, year, month, day, hour, minute, second);
+        System.out.println(success);
+    }
+    void delete(int id) {
+        AppearDAO appearDAO = new AppearDAO();
+        boolean success = appearDAO.delete(id);
+        System.out.println(success);
+    }
+
+    public static void main(String args[]) {
+        /*main.insert(6, 12206);
+        main.insert(7, 12101);
+        main.insert(8, 12219);
+        main.insert(9, 12220);
+        main.delete(5);*/
+
+        AppearDAO appearDAO = new AppearDAO();
+        List<Appear> list = appearDAO.findAll();
+        for (Appear p: list) {
+            int id = p.getId();
+            int number = p.getNumber();
+            String name = p.getName();
+            String ken = p.getKen();
+            String shi = p.getShi();
+            Date date = p.getDate();
+            Time time = p.getTime();
+            System.out.printf("%3d %3d %-10s %-10s %-10s %-10s %-10s \n",
+                    id, number,name, ken, shi, date, time);
+        }
+        System.out.println();
+    }
+}
